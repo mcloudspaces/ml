@@ -1,0 +1,207 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const stack = [
+  {
+    category: 'Operating Systems',
+    icon: '⬡',
+    color: '#00D4AA',
+    items: [
+      { name: 'Red Hat / RHEL', level: 'expert', years: '10+' },
+      { name: 'Ubuntu',         level: 'expert', years: '10+' },
+      { name: 'Debian',         level: 'expert', years: '8+'  },
+      { name: 'CentOS',         level: 'proficient', years: '7+' },
+    ],
+  },
+  {
+    category: 'Networking',
+    icon: '◈',
+    color: '#0090FF',
+    items: [
+      { name: 'TCP/IP & DNS',         level: 'expert',     years: '10+' },
+      { name: 'Firewalls & iptables',  level: 'expert',     years: '10+' },
+      { name: 'Load Balancing',        level: 'proficient', years: '7+'  },
+      { name: 'VPN & Network Design',  level: 'proficient', years: '8+'  },
+    ],
+  },
+  {
+    category: 'Cloud — AWS',
+    icon: '☁',
+    color: '#FF9900',
+    items: [
+      { name: 'EC2 / VPC / IAM',   level: 'proficient', years: '5+' },
+      { name: 'S3 / EBS / EFS',    level: 'proficient', years: '5+' },
+      { name: 'EKS',               level: 'proficient', years: '4+' },
+      { name: 'SageMaker',         level: 'beginner',   years: '1+' },
+    ],
+  },
+  {
+    category: 'Containers & Orchestration',
+    icon: '⎈',
+    color: '#326CE5',
+    items: [
+      { name: 'Docker',          level: 'expert',     years: '7+' },
+      { name: 'Kubernetes',      level: 'proficient', years: '5+' },
+      { name: 'Helm',            level: 'proficient', years: '4+' },
+      { name: 'CI/CD (GitOps)',  level: 'proficient', years: '4+' },
+    ],
+  },
+  {
+    category: 'Data Platform',
+    icon: '▦',
+    color: '#00D4AA',
+    items: [
+      { name: 'Apache Kafka',       level: 'proficient', years: '4+' },
+      { name: 'Apache Hadoop / HDFS', level: 'proficient', years: '4+' },
+      { name: 'YARN',               level: 'proficient', years: '4+' },
+      { name: 'Apache Iceberg',     level: 'proficient', years: '3+' },
+      { name: 'Apache Superset',    level: 'proficient', years: '3+' },
+      { name: 'Cloudera CDP',       level: 'proficient', years: '4+' },
+      { name: 'Dremio',             level: 'proficient', years: '3+' },
+      { name: 'dbt',                level: 'familiar',   years: '2+' },
+    ],
+  },
+  {
+    category: 'Data Architecture',
+    icon: '◎',
+    color: '#9B59B6',
+    items: [
+      { name: 'Data Warehouse design',  level: 'proficient', years: '4+' },
+      { name: 'Data Lake architecture', level: 'proficient', years: '4+' },
+      { name: 'Lakehouse patterns',     level: 'proficient', years: '3+' },
+      { name: 'Data modelling',         level: 'familiar',   years: '3+' },
+    ],
+  },
+  {
+    category: 'ML Platform',
+    icon: '◉',
+    color: '#FF6B9D',
+    items: [
+      { name: 'MLflow',       level: 'beginner', years: '<1' },
+      { name: 'Kubeflow',     level: 'beginner', years: '<1' },
+      { name: 'SageMaker',    level: 'beginner', years: '1+' },
+    ],
+  },
+  {
+    category: 'Languages & Tools',
+    icon: '{ }',
+    color: '#F0DB4F',
+    items: [
+      { name: 'Bash / Shell',  level: 'expert',     years: '10+' },
+      { name: 'Python',        level: 'proficient', years: '5+'  },
+      { name: 'SQL',           level: 'proficient', years: '6+'  },
+      { name: 'Terraform',     level: 'familiar',   years: '3+'  },
+      { name: 'Ansible',       level: 'familiar',   years: '4+'  },
+      { name: 'Git',           level: 'proficient', years: '8+'  },
+    ],
+  },
+];
+
+const levelColor: Record<string, string> = {
+  expert:     '#00D4AA',
+  proficient: '#0090FF',
+  familiar:   '#7A9AB8',
+  beginner:   '#FF6B9D',
+};
+---
+
+<Layout title="Stack — cloudspaces.gr" description="Full tech stack of a data and ML platform engineer.">
+
+  <section class="stack-hero">
+    <div class="container">
+      <p class="section-label">Tech stack</p>
+      <h1 class="stack-title">Tools I work with</h1>
+      <p class="stack-sub">10+ years of accumulated Linux, networking, cloud, and data platform knowledge. Honest about levels.</p>
+
+      <div class="legend">
+        {Object.entries(levelColor).map(([level, color]) => (
+          <span class="legend-item">
+            <span class="legend-dot" style={`background:${color}`}></span>
+            <span class="legend-text">{level}</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="glow-divider"></div>
+
+  <section class="stack-body">
+    <div class="container">
+      <div class="stack-grid">
+        {stack.map(({ category, icon, color, items }) => (
+          <div class="stack-card" style={`--cat-color: ${color}`}>
+            <div class="stack-card-header">
+              <span class="stack-icon" style={`color:${color}`}>{icon}</span>
+              <h2 class="stack-category">{category}</h2>
+            </div>
+            <ul class="stack-items">
+              {items.map(({ name, level, years }) => (
+                <li class="stack-item">
+                  <div class="item-left">
+                    <span class="item-dot" style={`background:${levelColor[level]}`}></span>
+                    <span class="item-name">{name}</span>
+                  </div>
+                  <div class="item-right">
+                    <span class="item-years">{years} yrs</span>
+                    <span class="item-level" style={`color:${levelColor[level]}`}>{level}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+.stack-hero { padding: 80px 0 48px; }
+.stack-title { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin-bottom: 12px; }
+.stack-sub { font-size: 16px; color: var(--text2); max-width: 480px; margin-bottom: 28px; }
+
+.legend { display: flex; gap: 20px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.legend-text { font-family: var(--mono); font-size: 11px; color: var(--text3); }
+
+.stack-body { padding: 48px 0 80px; }
+.stack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+
+.stack-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  transition: border-color 0.2s;
+}
+.stack-card:hover { border-color: var(--border2); }
+.stack-card::before {
+  content: '';
+  display: block;
+  height: 2px;
+  background: var(--cat-color);
+  border-radius: 2px;
+  margin-bottom: 20px;
+  opacity: 0.4;
+}
+
+.stack-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.stack-icon { font-size: 16px; font-family: var(--mono); }
+.stack-category { font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+
+.stack-items { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.stack-item { display: flex; justify-content: space-between; align-items: center; }
+.item-left { display: flex; align-items: center; gap: 9px; }
+.item-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.item-name { font-size: 13.5px; color: var(--text2); }
+.item-right { display: flex; align-items: center; gap: 10px; }
+.item-years { font-family: var(--mono); font-size: 10.5px; color: var(--text3); }
+.item-level { font-family: var(--mono); font-size: 10.5px; text-transform: capitalize; }
+
+@media (max-width: 640px) {
+  .stack-grid { grid-template-columns: 1fr; }
+}
+</style>

@@ -1,0 +1,153 @@
+---
+import Layout from '../layouts/Layout.astro';
+const lastUpdated = '8 March 2026';
+---
+
+<Layout title="Now — cloudspaces.gr" description="What I'm currently focused on.">
+
+  <section class="now-hero">
+    <div class="container">
+      <p class="section-label">Now</p>
+      <h1 class="now-title">What I'm up to</h1>
+      <p class="now-updated">Last updated: <span>{lastUpdated}</span></p>
+    </div>
+  </section>
+
+  <div class="glow-divider"></div>
+
+  <section class="now-body">
+    <div class="container now-grid">
+
+      <div class="now-main">
+
+        <div class="now-block">
+          <h2 class="now-heading">🔧 Working on</h2>
+          <ul class="now-list">
+            <li>Hardening a Kubernetes-based data platform on AWS EKS — improving observability with OpenTelemetry and Grafana stack</li>
+            <li>Migrating batch pipelines to Apache Kafka streaming architecture</li>
+            <li>Evaluating Apache Iceberg as a table format migration path from legacy Hive-based storage</li>
+            <li>Building this site — documenting the journey publicly for the first time</li>
+          </ul>
+        </div>
+
+        <div class="now-block">
+          <h2 class="now-heading">📚 Learning</h2>
+          <ul class="now-list">
+            <li><strong>Kubeflow</strong> — getting hands-on with ML pipeline orchestration on Kubernetes</li>
+            <li><strong>MLflow</strong> — experiment tracking and model registry patterns in production</li>
+            <li><strong>Apache Flink</strong> — stateful stream processing beyond Kafka consumer groups</li>
+            <li><strong>Terraform modules</strong> — making infrastructure reusable across environments</li>
+          </ul>
+        </div>
+
+        <div class="now-block">
+          <h2 class="now-heading">✍️ Writing about</h2>
+          <ul class="now-list">
+            <li>The real operational cost of running a Cloudera CDP cluster vs cloud-native alternatives</li>
+            <li>Dremio as a query engine for a data lakehouse — when it works, when it doesn't</li>
+            <li>A practical guide to Apache Iceberg table maintenance at scale</li>
+          </ul>
+        </div>
+
+        <div class="now-block">
+          <h2 class="now-heading">💭 Thinking about</h2>
+          <ul class="now-list">
+            <li>The gap between "ML platform" and "platform that can run ML workloads" — they are not the same thing</li>
+            <li>How much platform complexity is justified before the platform becomes the product</li>
+            <li>Writing more publicly — the friction of perfectionism vs the value of shipping</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <aside class="now-aside">
+        <div class="now-card">
+          <h3 class="aside-h">Current focus areas</h3>
+          <div class="focus-list">
+            {[
+              { label: 'Data Platform Ops',    pct: 50 },
+              { label: 'ML Platform Learning', pct: 20 },
+              { label: 'Infrastructure',       pct: 20 },
+              { label: 'Writing & OSS',        pct: 10 },
+            ].map(({ label, pct }) => (
+              <div class="focus-item">
+                <div class="focus-top">
+                  <span class="focus-label">{label}</span>
+                  <span class="focus-pct">{pct}%</span>
+                </div>
+                <div class="focus-bar">
+                  <div class="focus-fill" style={`width:${pct}%`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="now-card">
+          <h3 class="aside-h">Reading</h3>
+          <ul class="reading-list">
+            <li>"Designing Data-Intensive Applications" — Kleppmann</li>
+            <li>"The Platform Engineering Handbook" — various</li>
+            <li>Apache Iceberg documentation (the actual spec)</li>
+          </ul>
+        </div>
+
+        <div class="now-card">
+          <h3 class="aside-h">What is a /now page?</h3>
+          <p class="aside-p">A <a href="https://nownownow.com/about" target="_blank">/now page</a> is a public snapshot of what someone is focused on at this point in their life. Updated occasionally.</p>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+.now-hero { padding: 80px 0 48px; }
+.now-title { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin-bottom: 10px; }
+.now-updated { font-family: var(--mono); font-size: 12px; color: var(--text3); }
+.now-updated span { color: var(--accent); }
+
+.now-body { padding: 48px 0 80px; }
+.now-grid { display: grid; grid-template-columns: 1fr 280px; gap: 56px; align-items: start; }
+
+.now-block { margin-bottom: 44px; }
+.now-heading { font-family: var(--sans); font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 16px; }
+.now-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.now-list li {
+  padding: 12px 16px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14.5px;
+  color: var(--text2);
+  line-height: 1.65;
+  border-left: 2px solid var(--border2);
+}
+.now-list li strong { color: var(--text); font-weight: 500; }
+
+/* ASIDE */
+.now-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 14px; }
+.aside-h { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
+.aside-p { font-size: 13px; color: var(--text2); line-height: 1.65; }
+.aside-p a { color: var(--accent); border-bottom: 1px solid rgba(0,212,170,0.3); }
+
+/* FOCUS BARS */
+.focus-list { display: flex; flex-direction: column; gap: 14px; }
+.focus-top { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.focus-label { font-size: 12px; color: var(--text2); }
+.focus-pct { font-family: var(--mono); font-size: 11px; color: var(--text3); }
+.focus-bar { height: 3px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+.focus-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; }
+
+/* READING */
+.reading-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.reading-list li { font-size: 12.5px; color: var(--text2); padding-left: 12px; position: relative; }
+.reading-list li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
+
+@media (max-width: 780px) {
+  .now-grid { grid-template-columns: 1fr; }
+  .now-aside { order: -1; }
+}
+</style>

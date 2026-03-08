@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact — cloudspaces.gr" description="Get in touch with a data and ML platform engineer.">
+
+  <section class="contact-hero">
+    <div class="container">
+      <p class="section-label">Contact</p>
+      <h1 class="contact-title">Let's talk.</h1>
+      <p class="contact-sub">
+        Whether you're building a data platform, thinking about ML infrastructure, 
+        or just want to exchange ideas about Kubernetes and Apache ecosystems — 
+        I'm always open to a good conversation.
+      </p>
+    </div>
+  </section>
+
+  <div class="glow-divider"></div>
+
+  <section class="contact-body">
+    <div class="container contact-grid">
+
+      <!-- LEFT -->
+      <div class="contact-main">
+
+        <div class="email-block">
+          <p class="email-label">Best way to reach me</p>
+          <a href="mailto:m@cloudspaces.gr" class="email-address">
+            m@cloudspaces.gr
+            <span class="email-icon">→</span>
+          </a>
+          <p class="email-note">I read every email. I reply to almost all of them.</p>
+        </div>
+
+        <div class="topics">
+          <p class="topics-label">Good reasons to write</p>
+          <div class="topics-grid">
+            {[
+              { icon: '🏗️', title: 'Data platform architecture', desc: 'Kafka, Hadoop, Iceberg, Dremio, Cloudera — architecture decisions, trade-offs, war stories.' },
+              { icon: '⎈',  title: 'Kubernetes for data workloads', desc: 'Running stateful data platform components on K8s, EKS, resource management patterns.' },
+              { icon: '🤖', title: 'ML platform questions', desc: 'Getting started with MLflow, Kubeflow, SageMaker. Happy to learn together.' },
+              { icon: '🐧', title: 'Linux & infrastructure', desc: 'OS hardening, networking, anything deep systems. My oldest love.' },
+              { icon: '💼', title: 'Work opportunities', desc: 'Consulting, contract, or full-time. Remote-friendly. Interesting problems only.' },
+              { icon: '✍️', title: 'Blog topics', desc: 'Something you want me to write about? Tell me. I take requests.' },
+            ].map(({ icon, title, desc }) => (
+              <div class="topic-card">
+                <span class="topic-icon">{icon}</span>
+                <div>
+                  <p class="topic-title">{title}</p>
+                  <p class="topic-desc">{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <aside class="contact-aside">
+
+        <div class="aside-block">
+          <h3 class="aside-h">Response time</h3>
+          <p class="aside-p">Usually within 24-48 hours on weekdays. Longer if I'm fighting a Kafka partition reassignment in production.</p>
+        </div>
+
+        <div class="aside-block">
+          <h3 class="aside-h">What I'm open to</h3>
+          <ul class="open-list">
+            <li>Platform engineering consulting</li>
+            <li>Data infrastructure reviews</li>
+            <li>Technical writing collaboration</li>
+            <li>Full-time remote roles</li>
+            <li>Conference talks & podcasts</li>
+          </ul>
+        </div>
+
+        <div class="aside-block">
+          <h3 class="aside-h">Location</h3>
+          <p class="aside-p">Greece 🇬🇷<br/>Remote-first, open to async collaboration across timezones.</p>
+        </div>
+
+        <a href="mailto:m@cloudspaces.gr" class="cta-email btn btn--primary">
+          Send an email →
+        </a>
+
+      </aside>
+
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+.contact-hero { padding: 80px 0 48px; }
+.contact-title { font-size: clamp(40px, 6vw, 64px); font-weight: 800; letter-spacing: -0.04em; color: var(--text); margin-bottom: 16px; }
+.contact-sub { font-size: 17px; color: var(--text2); max-width: 520px; line-height: 1.75; font-weight: 300; }
+
+.contact-body { padding: 56px 0 80px; }
+.contact-grid { display: grid; grid-template-columns: 1fr 280px; gap: 64px; align-items: start; }
+
+/* EMAIL */
+.email-block { margin-bottom: 52px; }
+.email-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 14px; }
+.email-address {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  border-bottom: 2px solid rgba(0,212,170,0.2);
+  padding-bottom: 4px;
+  transition: border-color 0.2s;
+}
+.email-address:hover { border-color: var(--accent); }
+.email-icon { font-size: 20px; transition: transform 0.2s; }
+.email-address:hover .email-icon { transform: translateX(4px); }
+.email-note { font-family: var(--mono); font-size: 11.5px; color: var(--text3); margin-top: 10px; }
+
+/* TOPICS */
+.topics-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 18px; }
+.topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.topic-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  transition: border-color 0.2s;
+}
+.topic-card:hover { border-color: var(--border2); }
+.topic-icon { font-size: 18px; flex-shrink: 0; }
+.topic-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.topic-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+/* ASIDE */
+.aside-block { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 12px; }
+.aside-h { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
+.aside-p { font-size: 13.5px; color: var(--text2); line-height: 1.65; }
+
+.open-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.open-list li { font-size: 13px; color: var(--text2); padding-left: 14px; position: relative; }
+.open-list li::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-size: 16px; line-height: 1; top: 1px; }
+
+.cta-email { display: flex; justify-content: center; width: 100%; margin-top: 4px; }
+
+@media (max-width: 780px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-aside { order: -1; }
+  .topics-grid { grid-template-columns: 1fr; }
+}
+</style>

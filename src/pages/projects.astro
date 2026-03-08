@@ -1,0 +1,171 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('projects');
+const active   = all.filter(p => p.data.status === 'active');
+const shipped  = all.filter(p => p.data.status === 'shipped');
+const paused   = all.filter(p => p.data.status === 'paused');
+
+const statusLabel: Record<string, string> = {
+  active:  'Active',
+  shipped: 'Shipped',
+  paused:  'Paused',
+};
+const statusColor: Record<string, string> = {
+  active:  'var(--accent)',
+  shipped: 'var(--accent2)',
+  paused:  'var(--text3)',
+};
+---
+
+<Layout title="Projects — cloudspaces.gr">
+
+  <section class="proj-hero">
+    <div class="container">
+      <p class="section-label">Projects</p>
+      <h1 class="proj-title">Things I'm building</h1>
+      <p class="proj-sub">Open source work, side projects, and infrastructure experiments.</p>
+    </div>
+  </section>
+
+  <div class="glow-divider"></div>
+
+  <section class="proj-body">
+    <div class="container">
+
+      {active.length > 0 && (
+        <div class="proj-group">
+          <h2 class="group-heading">
+            <span class="status-dot" style="background: var(--accent)"></span>
+            Active
+          </h2>
+          <div class="proj-grid">
+            {active.map(p => (
+              <div class="proj-card">
+                <div class="proj-card-top">
+                  <span class="proj-status" style={`color:${statusColor[p.data.status]}`}>● {statusLabel[p.data.status]}</span>
+                  {p.data.github && (
+                    <a href={p.data.github} target="_blank" class="proj-link">GitHub ↗</a>
+                  )}
+                </div>
+                <h3 class="proj-name">{p.data.title}</h3>
+                <p class="proj-desc">{p.data.description}</p>
+                <div class="proj-tags">
+                  {p.data.tags.map((t: string) => <span class="tag tag--blue">{t}</span>)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {shipped.length > 0 && (
+        <div class="proj-group">
+          <h2 class="group-heading">
+            <span class="status-dot" style="background: var(--accent2)"></span>
+            Shipped
+          </h2>
+          <div class="proj-grid">
+            {shipped.map(p => (
+              <div class="proj-card">
+                <div class="proj-card-top">
+                  <span class="proj-status" style={`color:${statusColor[p.data.status]}`}>● {statusLabel[p.data.status]}</span>
+                  {p.data.github && (
+                    <a href={p.data.github} target="_blank" class="proj-link">GitHub ↗</a>
+                  )}
+                  {p.data.link && (
+                    <a href={p.data.link} target="_blank" class="proj-link">Live ↗</a>
+                  )}
+                </div>
+                <h3 class="proj-name">{p.data.title}</h3>
+                <p class="proj-desc">{p.data.description}</p>
+                <div class="proj-tags">
+                  {p.data.tags.map((t: string) => <span class="tag">{t}</span>)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {paused.length > 0 && (
+        <div class="proj-group">
+          <h2 class="group-heading">
+            <span class="status-dot" style="background: var(--text3)"></span>
+            Paused
+          </h2>
+          <div class="proj-grid">
+            {paused.map(p => (
+              <div class="proj-card proj-card--dim">
+                <div class="proj-card-top">
+                  <span class="proj-status" style={`color:${statusColor[p.data.status]}`}>● {statusLabel[p.data.status]}</span>
+                </div>
+                <h3 class="proj-name">{p.data.title}</h3>
+                <p class="proj-desc">{p.data.description}</p>
+                <div class="proj-tags">
+                  {p.data.tags.map((t: string) => <span class="tag">{t}</span>)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {all.length === 0 && (
+        <div class="empty">
+          <p>Projects coming soon.</p>
+        </div>
+      )}
+
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+.proj-hero { padding: 80px 0 48px; }
+.proj-title { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin-bottom: 10px; }
+.proj-sub { font-size: 16px; color: var(--text2); }
+
+.proj-body { padding: 48px 0 80px; }
+.proj-group { margin-bottom: 56px; }
+
+.group-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 20px;
+}
+.status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+.proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+
+.proj-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.proj-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.proj-card--dim { opacity: 0.6; }
+
+.proj-card-top { display: flex; justify-content: space-between; align-items: center; }
+.proj-status { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; }
+.proj-link { font-family: var(--mono); font-size: 11px; color: var(--text3); transition: color 0.2s; }
+.proj-link:hover { color: var(--accent); }
+.proj-name { font-size: 16px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+.proj-desc { font-size: 13.5px; color: var(--text2); line-height: 1.65; flex: 1; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.empty { padding: 60px 0; text-align: center; font-family: var(--mono); font-size: 13px; color: var(--text3); }
+</style>
